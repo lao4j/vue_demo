@@ -17,7 +17,7 @@ export default new Router({
       meta: {
         title: '用户管理'
       },
-      component: () => import('@/pages/userManager/index.vue')
+      component: () => import('@/pages/userManager/userManager.vue')
     }
   ]
 })
