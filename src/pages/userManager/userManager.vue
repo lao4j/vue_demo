@@ -73,11 +73,8 @@
 </div>
 </template>
 
-<style lang='css' scoped>
-@import 'userManager.css';
-</style>
-
 <script>
+import 'userManager.css'
 export default {
   data () {
     return {
