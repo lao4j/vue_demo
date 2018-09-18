@@ -23,16 +23,13 @@
                 </div>
             </Menu>
         </Header>
-    <Layout>
+    </Layout>
 </template>
 <style>
-
+@import 'header-bar.css';
 </style>
 <script>
-import mixin from './mixin'
 export default {
-    name: 'HeaderMenu',
-    mixins: [ mixin ]
+  name: 'HeaderMenu'
 }
 </script>
-

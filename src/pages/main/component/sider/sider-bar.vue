@@ -32,12 +32,10 @@
     </Layout>
 </template>
 <style>
-
+@import 'sider-bar.css'
 </style>
 <script>
-import mixin from './mixin'
 export default {
-    name: 'SideMenu',
-    mixins: [ mixin ]
+  name: 'SideMenu'
 }
 </script>
