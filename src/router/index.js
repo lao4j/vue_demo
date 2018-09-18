@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Main from '@/view/main'
+import Main from '@/pages/main'
 
 Vue.use(Router)
 
@@ -18,14 +17,7 @@ export default new Router({
       meta: {
         title: '用户管理'
       },
-      component: () => import('@/pages/userManager/index.vue'),
-      children: [{
-        path: 'addUser',
-        component: () => import('@/pages/userManager/addUser/addUser.vue')
-      }, {
-        path: 'userDetail',
-        component: () => import('@/pages/userManager/userDetail/userDetail.vue')
-      }]
+      component: () => import('@/pages/userManager/userManager.vue')
     }
   ]
 })
