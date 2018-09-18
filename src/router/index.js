@@ -18,7 +18,14 @@ export default new Router({
       meta: {
         title: '用户管理'
       },
-      component: () => import('@/pages/userManager/userManager.vue')
+      component: () => import('@/pages/userManager/index.vue'),
+      children: [{
+        path: 'addUser',
+        component: () => import('@/pages/userManager/addUser/addUser.vue')
+      }, {
+        path: 'userDetail',
+        component: () => import('@/pages/userManager/userDetail/userDetail.vue')
+      }]
     }
   ]
 })
