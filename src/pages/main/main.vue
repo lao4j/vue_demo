@@ -1,13 +1,13 @@
 <template>
 <div class="layout">
-    <Layout style="height: 100%">
-        <Sider hide-trigger :width="256" v-model="collapsed" class="left-sider" :style="{overflow: 'hidden'}">
-            <side-menu accordion ref="sideMenu">
+    <Layout>
+        <Sider hide-trigger width="auto" class="left-sider" :style="{overflow: 'hidden'}">
+            <side-menu @on-select="turnToPage">
             </side-menu>
         </Sider>
         <Layout>
             <Header>
-                <header-menu  >
+                <header-menu>
                 </header-menu>
             </Header>
         </Layout>
@@ -21,6 +21,10 @@
     position: relative;
     border-radius: 4px;
     overflow: hidden;
+    height: 800px;
+}
+.left-sider {
+    height: 100%;
 }
 </style>
 <script>
@@ -30,6 +34,12 @@ export default {
   components: {
     SideMenu,
     HeaderMenu
+  },
+  methods: {
+    turnToPage (route) {
+      debugger
+      this.$router.push({name: 'userManager', params: {}})
+    }
   }
 }
 </script>

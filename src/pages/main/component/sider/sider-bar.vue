@@ -1,41 +1,31 @@
 <template>
-    <Layout>
+    <Layout class="left-layout">
         <Sider hide-trigger :style="{background: '#fff'}">
-            <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
+            <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']" @on-select="onSelect()">
                 <Submenu name="1">
                     <template slot="title">
                         <Icon type="ios-navigate"></Icon>
-                        Item 1
+                        用户管理
                     </template>
-                    <MenuItem name="1-1">Option 1</MenuItem>
-                    <MenuItem name="1-2">Option 2</MenuItem>
-                    <MenuItem name="1-3">Option 3</MenuItem>
-                </Submenu>
-                <Submenu name="2">
-                    <template slot="title">
-                        <Icon type="ios-keypad"></Icon>
-                        Item 2
-                    </template>
-                    <MenuItem name="2-1">Option 1</MenuItem>
-                    <MenuItem name="2-2">Option 2</MenuItem>
-                </Submenu>
-                <Submenu name="3">
-                    <template slot="title">
-                        <Icon type="ios-analytics"></Icon>
-                        Item 3
-                    </template>
-                    <MenuItem name="3-1">Option 1</MenuItem>
-                    <MenuItem name="3-2">Option 2</MenuItem>
+                    <MenuItem name="1-1" >列表页面</MenuItem>
+                    <MenuItem name="1-2">新增页面</MenuItem>
                 </Submenu>
             </Menu>
         </Sider>
     </Layout>
 </template>
+
 <style>
-@import 'sider-bar.css'
+@import 'sider-bar.css';
 </style>
+
 <script>
 export default {
-  name: 'SideMenu'
+  name: 'SideMenu',
+  methods: {
+    onSelect (item) {
+      this.$emit('on-select', name)
+    }
+  }
 }
 </script>
