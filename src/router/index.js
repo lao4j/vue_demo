@@ -12,12 +12,20 @@ export default new Router({
       component: Main,
       children: [
         {
-          path: '/userManager',
-          name: 'userManager',
+          path: '/userManager/listPage',
+          name: 'listPage',
           meta: {
-            title: '用户管理'
+            title: '列表页面'
           },
-          component: () => import('@/pages/userManager/userManager.vue')
+          component: () => import('@/pages/userManager/listPage')
+        },
+        {
+          path: '/userManager/addPage',
+          name: 'addPage',
+          meta: {
+            title: '新增列表'
+          },
+          component: () => import('@/pages/userManager/addPage')
         }
       ]
     }

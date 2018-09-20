@@ -5,7 +5,7 @@
 </template>
 
 <style lang="css" scoped>
-@import 'userManager.css';
+@import 'listPage.css';
 </style>
 
 <script>
@@ -20,7 +20,6 @@ export default {
   },
   methods: {
     submitAction: function (e) {
-      debugger
       console.log(e)
     }
   }
