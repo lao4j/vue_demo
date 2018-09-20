@@ -32,38 +32,25 @@
           <FormItem label="家庭住址" prop="address">
               <Input v-model="formValidate.address"></Input>
           </FormItem>
-          <FormItem label="Hobby" prop="interest">
-              <CheckboxGroup v-model="formValidate.interest">
-                  <Checkbox label="Eat"></Checkbox>
-                  <Checkbox label="Sleep"></Checkbox>
-                  <Checkbox label="Run"></Checkbox>
-                  <Checkbox label="Movie"></Checkbox>
-              </CheckboxGroup>
-          </FormItem>
-          <FormItem label="Desc" prop="desc">
-              <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
-          </FormItem>
           <FormItem>
-              <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
-              <Button @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
+              <Button type="primary" @click="handleSubmit('formValidate')">保存</Button>
+              <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
           </FormItem>
         </Col>
         <Col span="11">
           <FormItem>
-            <Input v-model="contact">
-              <span slot="prepend">QQ</span>
-              <span slot="append">手机</span>
-              <span slot="append">邮箱</span>
-              <span slot="append">固定电话</span>
-              <span slot="append">微信</span>
-            </Input>
+            <dynamic-contact></dynamic-contact>
           </FormItem>
         </Col>
       </Row>
     </Form>
 </template>
 <script>
+import DynamicContact from '@/components/common/dynamicInputText'
 export default {
+  components: {
+    DynamicContact
+  },
   data () {
     return {
       formValidate: {
@@ -73,10 +60,9 @@ export default {
         city: '',
         sex: '',
         address: '',
-        interest: [],
-        birthday: '',
-        time: '',
-        desc: ''
+        contact: '',
+        contactSelect: 'QQ',
+        birthday: ''
       },
       ruleValidate: {
         cname: [
@@ -117,21 +103,6 @@ export default {
         sex: [
           { required: true, message: '请选择性别', trigger: 'change' }
         ],
-        interest: [
-          {
-            required: true,
-            type: 'array',
-            min: 1,
-            message: 'Choose at least one hobby',
-            trigger: 'change'
-          },
-          {
-            type: 'array',
-            max: 2,
-            message: 'Choose two hobbies at best',
-            trigger: 'change'
-          }
-        ],
         birthday: [
           {
             required: true,
@@ -147,25 +118,13 @@ export default {
             message: 'Please select time',
             trigger: 'change'
           }
-        ],
-        desc: [
-          {
-            required: true,
-            message: 'Please enter a personal introduction',
-            trigger: 'blur'
-          },
-          {
-            type: 'string',
-            min: 20,
-            message: 'Introduce no less than 20 words',
-            trigger: 'blur'
-          }
         ]
       }
     }
   },
   methods: {
     handleSubmit (name) {
+      debugger
       this.$refs[name].validate(valid => {
         if (valid) {
           this.$Message.success('Success!')
