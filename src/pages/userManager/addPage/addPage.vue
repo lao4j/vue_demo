@@ -32,19 +32,29 @@
           <FormItem label="家庭住址" prop="address">
               <Input v-model="formValidate.address"></Input>
           </FormItem>
-          <FormItem>
+          <div class="button-div">
+            <FormItem>
               <Button type="primary" @click="handleSubmit('formValidate')">保存</Button>
               <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
-          </FormItem>
+            </FormItem>
+          </div>
         </Col>
         <Col span="11">
           <FormItem>
-            <dynamic-contact></dynamic-contact>
+            <dynamic-contact :contactList='contactList'></dynamic-contact>
           </FormItem>
         </Col>
       </Row>
     </Form>
 </template>
+<style scoped>
+.button-div {
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+</style>
+
 <script>
 import DynamicContact from '@/components/common/dynamicInputText'
 export default {
@@ -53,6 +63,13 @@ export default {
   },
   data () {
     return {
+      contactList: [
+        {
+          id: 'contact-item-' + new Date().getTime(),
+          contactType: 'QQ',
+          contact: ''
+        }
+      ],
       formValidate: {
         cname: '',
         ename: '',
@@ -124,14 +141,8 @@ export default {
   },
   methods: {
     handleSubmit (name) {
-      debugger
-      this.$refs[name].validate(valid => {
-        if (valid) {
-          this.$Message.success('Success!')
-        } else {
-          this.$Message.error('Fail!')
-        }
-      })
+      let contacts = this.$refs.DynamicContact.getSubmitValues()
+      console.log(contacts)
     },
     handleReset (name) {
       this.$refs[name].resetFields()

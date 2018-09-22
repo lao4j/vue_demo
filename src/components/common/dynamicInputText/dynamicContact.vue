@@ -2,8 +2,8 @@
 <div>
   <FormItem>
     <div class="contact-item" v-for="(item,index) in contactList" :key="item.id" v-bind:index="index">
-      <Input :id="item.id+index" :name="item.name+index" >
-        <Select slot="prepend" style="width: 80px" value='QQ'>
+      <Input v-model="contactList[index].contact" icon='md-trash' @on-click='delContact(contactList[index].id)' id="contactList[index].id">
+        <Select v-model="contactList[index].contactType" slot="prepend" style="width: 80px">
           <Option value="QQ">QQ</Option>
           <Option value="mobile">手机</Option>
           <Option value="mail">邮箱</Option>
@@ -37,14 +37,10 @@ var maxContact = 5
 var currentNum = 1
 export default {
   name: 'DynamicContact',
+  props: ['contactList'],
   data () {
     return {
-      contactList: [
-        {
-          id: 'contact',
-          name: 'contact'
-        }
-      ]
+      test: ''
     }
   },
   methods: {
@@ -56,10 +52,24 @@ export default {
       }
       currentNum++
       this.contactList.push({
-        id: 'contact',
-        name: 'contact'
+        id: 'contact-item-' + new Date().getTime(),
+        contactType: 'QQ',
+        contact: ''
       })
-      return 'null'
+    },
+    delContact: function (id) {
+      if (currentNum <= 1) {
+        this.$Message.error('最少保留' + currentNum + '个')
+        return
+      }
+      for (var i = 0; i < this.contactList.length; i++) {
+        if (this.contactList[i].id === id) {
+          this.contactList.splice(i, 1)
+          currentNum--
+          break
+        }
+      }
+      console.log('delContact')
     }
   },
   computed: {

@@ -1,7 +1,14 @@
 <template>
-    <div>
-        this is a page
-    </div>
+<div class="list-root">
+  <div class="button-new" >
+    <Button type="primary" @click="newContact">新增</Button>
+  </div>
+  <div>
+    <Table :columns="columns" :data="gridData"></Table>
+  </div>
+  <detail-modal v-on:hide="hide" v-bind:showDetail='showDetail'
+    v-bind:detailData='detailData'></detail-modal>
+</div>
 </template>
 
 <style lang="css" scoped>
@@ -9,10 +16,113 @@
 </style>
 
 <script>
+import DetailModal from './detailModal'
+import {getLevelStar} from '@/utils/StringUtils.js'
 export default {
+  components: {
+    DetailModal
+  },
   data () {
     return {
-      testData: 'this a test'
+      showDetail: false,
+      detailData: {},
+      columns: [
+        {
+          title: '中文名',
+          key: 'cname'
+        },
+        {
+          title: '英文名',
+          key: 'ename'
+        },
+        {
+          title: '性别',
+          key: 'sex'
+        },
+        {
+          title: '出生日期',
+          key: 'birthday'
+        },
+        {
+          title: '所属公司',
+          key: 'company'
+        },
+        {
+          title: '客户等级',
+          key: 'level',
+          render: (h, params) => {
+            var level = params.row.level
+            var result = getLevelStar(level)
+            return h('div', {}, result)
+          }
+        },
+        {
+          title: '家庭住址',
+          key: 'address'
+        },
+        {
+          title: '操作',
+          key: 'action',
+          width: 150,
+          align: 'center',
+          render: (h, params) => {
+            return h('div', [
+              h('icon', {
+                props: {
+                  type: 'md-trash',
+                  size: 20
+                },
+                style: {
+                  marginRight: '10px',
+                  cursor: 'pointer'
+                },
+                on: {
+                  click: () => {
+                    this.deleteRecord(params)
+                  }
+                }
+              }, 'View'),
+              h('icon', {
+                props: {
+                  type: 'md-eye',
+                  size: 20
+                },
+                style: {
+                  marginRight: '10px',
+                  cursor: 'pointer'
+                },
+                on: {
+                  click: () => {
+                    this.show(params)
+                  }
+                }
+              }, 'Delete')
+            ])
+          }
+        }
+      ],
+      gridData: [
+        {
+          id: '0001',
+          cname: '王思聪',
+          ename: 'rich man',
+          sex: '男',
+          company: '万达集团',
+          level: 5,
+          address: '这个我也不知道啊，可能四海为家吧。。',
+          birthday: '2016-10-03'
+        },
+        {
+          id: '0002',
+          cname: '刘强东',
+          ename: 'east man',
+          sex: '男',
+          company: '京东集团',
+          level: 4,
+          address: '这个我也不知道啊，不知道回来了没',
+          birthday: '1950-10-03'
+        }
+      ]
     }
   },
   computed: {
@@ -21,6 +131,19 @@ export default {
   methods: {
     submitAction: function (e) {
       console.log(e)
+    },
+    newContact: function () {
+      this.$router.push({name: 'addPage'})
+    },
+    deleteRecord: function (params) {
+      console.log('delete id ' + params.row.id)
+    },
+    show: function (params) {
+      this.detailData = params.row
+      this.showDetail = true
+    },
+    hide: function (showDetail) {
+      this.showDetail = false
     }
   }
 }
