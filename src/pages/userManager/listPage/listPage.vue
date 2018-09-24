@@ -126,7 +126,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.show(params)
+                    this.editor(params)
                   }
                 }
               }, 'Edit')
@@ -139,19 +139,25 @@ export default {
           id: '0001',
           cname: '王思聪',
           ename: 'rich man',
-          sex: '男',
+          sex: 'male',
           company: '万达集团',
-          level: 5,
+          level: '5',
           address: '这个我也不知道啊，可能四海为家吧。。',
-          birthday: '2016-10-03'
+          birthday: '2016-10-03',
+          contact: [
+            {
+              type: 'qq',
+              value: '234'
+            }
+          ]
         },
         {
           id: '0002',
           cname: '刘强东',
           ename: 'east man',
-          sex: '男',
+          sex: 'female',
           company: '京东集团',
-          level: 4,
+          level: '4',
           address: '这个我也不知道啊，不知道回来了没',
           birthday: '1950-10-03'
         }
@@ -177,9 +183,13 @@ export default {
     },
     hide: function (showDetail) {
       this.showDetail = false
+    },
+    editor: function (params) {
+      this.$router.push({name: 'addPage', params: {userData: params.row}})
     }
   },
   beforeCreate (e) {
+    var me = this
     axios.request({
       url: 'api/queryClientList.action',
       params: {
@@ -189,9 +199,9 @@ export default {
       },
       method: 'get'
     }).then(res => {
-      this.gridData = res.data.data.rows
+      me.gridData = res.data.data.rows
     }).catch(function (error) {
-      this.$Message.info(error)
+      me.$Message.error(error.message)
     })
   }
 }

@@ -27,7 +27,29 @@ function sexEn2Cn (sex) {
   }
 }
 
+/**
+ * 通讯方式转换中文
+ * @param type
+ */
+function contactTypeEn2Cn (type) {
+  switch (type) {
+    case 'qq' :
+      return 'QQ'
+    case 'mobile' :
+      return '手机'
+    case 'tel' :
+      return '电话'
+    case 'wechat' :
+      return '微信'
+    case 'email' :
+      return '邮箱'
+    default:
+      return '卫星'
+  }
+}
+
 export {
   getLevelStar,
-  sexEn2Cn
+  sexEn2Cn,
+  contactTypeEn2Cn
 }

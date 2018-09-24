@@ -6,7 +6,7 @@
         <Select v-model="contactList[index].type" slot="prepend" style="width: 80px">
           <Option value="qq">QQ</Option>
           <Option value="mobile">手机</Option>
-          <Option value="mail">邮箱</Option>
+          <Option value="email">邮箱</Option>
           <Option value="tel">固定电话</Option>
           <Option value="wechat">微信</Option>
         </Select>
@@ -73,7 +73,6 @@ export default {
     }
   },
   computed: {
-
   }
 }
 </script>

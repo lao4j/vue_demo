@@ -32,7 +32,11 @@
       </tr>
       <tr>
         <td>联系方式：</td>
-        <td class="display-value">{{detailData.cncontact}}</td>
+        <td class="display-value">
+          <div v-for="contact in detailData.contact" :key="contact.type">
+            <span>{{typeConverter(contact.type)}}：{{contact.value}}</span>
+          </div>
+        </td>
       </tr>
     </table>
     <div class="bottom-btn">
@@ -54,10 +58,11 @@ td {
 }
 .bottom-btn {
   text-align: center;
+  margin-top: 10px;
 }
 </style>
 <script>
-import {getLevelStar, sexEn2Cn} from '@/utils/StringUtils.js'
+import {getLevelStar, sexEn2Cn, contactTypeEn2Cn} from '@/utils/StringUtils.js'
 export default {
   name: 'DetailModal',
   props: ['showDetail', 'detailData'],
@@ -74,6 +79,9 @@ export default {
         // 点击空白或者按键关闭modal
         this.hide()
       }
+    },
+    typeConverter: function (type) {
+      return contactTypeEn2Cn(type)
     }
   },
   computed: {

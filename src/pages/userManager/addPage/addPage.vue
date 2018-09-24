@@ -64,22 +64,15 @@ export default {
   },
   data () {
     return {
-      contactList: [
-        {
-          id: 'contact-item-' + new Date().getTime(),
-          type: 'QQ',
-          value: ''
-        }
-      ],
+      contactList: this.getDefaultContactList(),
       formValidate: {
         cname: '',
         ename: '',
         company: '',
-        city: '',
         sex: '',
         address: '',
         contact: '',
-        contactSelect: 'QQ',
+        level: '',
         birthday: ''
       },
       ruleValidate: {
@@ -111,13 +104,6 @@ export default {
             trigger: 'blur'
           }
         ],
-        city: [
-          {
-            required: true,
-            message: 'Please select the city',
-            trigger: 'change'
-          }
-        ],
         sex: [
           {
             required: true,
@@ -133,44 +119,73 @@ export default {
             message: '请选择一个出生日期',
             trigger: 'change'
           }
-        ],
-        time: [
-          {
-            required: true,
-            type: 'string',
-            message: 'Please select time',
-            trigger: 'change'
-          }
         ]
       }
     }
   },
   methods: {
     handleSubmit (name) {
-      debugger
       axios.request({
         url: 'api/addClient.action',
         params: {
-          cname: this.cname,
-          ename: this.ename,
-          company: this.company,
-          city: this.city,
-          sex: this.sex,
-          address: this.address,
+          cname: this.formValidate.cname,
+          ename: this.formValidate.ename,
+          company: this.formValidate.company,
+          level: this.formValidate.level,
+          sex: this.formValidate.sex,
+          address: this.formValidate.address,
           contact: this.contactList,
-          birthday: this.birthday
+          birthday: this.formValidate.birthday
         },
         method: 'post'
       }).then(res => {
-        this.$Message.info('保存成功')
+        if (res.data.errcode) {
+          this.$Message.error(res.data.errmsg)
+        } else {
+          this.$Message.info('保存成功')
+          this.handleReset()
+        }
       }).catch(function (error) {
         this.$Message.error(error)
       })
-      console.log(contacts)
     },
     handleReset (name) {
       this.$refs[name].resetFields()
+      this.contactList = this.getDefaultContactList()
+    },
+    setParams: function () {
+      if (!this.$route.params.userData) {
+        this.handleReset('formValidate')
+      } else {
+        this.formValidate.cname = this.$route.params.userData.cname
+        this.formValidate.ename = this.$route.params.userData.ename
+        this.formValidate.company = this.$route.params.userData.company
+        this.formValidate.sex = this.$route.params.userData.sex
+        this.formValidate.address = this.$route.params.userData.address
+        this.formValidate.contact = this.$route.params.userData.contact
+        this.formValidate.level = this.$route.params.userData.level
+        this.formValidate.birthday = this.$route.params.userData.birthday
+        if (!this.$route.params.userData.contact) {
+          this.contactList = this.getDefaultContactList()
+        } else {
+          this.contactList = this.$route.params.userData.contact
+        }
+      }
+    },
+    getDefaultContactList: function () {
+      return [{
+        id: 'contact-item-' + new Date().getTime(),
+        type: 'QQ',
+        value: ''
+      }]
     }
+  },
+  created () {
+    this.setParams()
+  },
+  watch: {
+  // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
+    '$route': 'setParams'
   }
 }
 </script>
