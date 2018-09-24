@@ -5,6 +5,10 @@
 const path = require('path')
 
 module.exports = {
+  baseUrl: {
+    dev: 'http://mock.wmd.wangsu.com/mock/265/',
+    pro: 'http://mock.wmd.wangsu.com/mock/265/'
+  },
   dev: {
 
     // Paths

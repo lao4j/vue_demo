@@ -1,46 +1,60 @@
 <template>
+<div class="modal-root">
   <Modal title="客户详情" :value="showDetail" :footer-hide=true @on-visible-change='statusChange'>
     <table>
       <tr>
         <td>中文名：</td>
-        <td>{{detailData.cname}}</td>
+        <td class="display-value">{{detailData.cname}}</td>
       </tr>
       <tr>
         <td>英文名：</td>
-        <td>{{detailData.ename}}</td>
+        <td class="display-value">{{detailData.ename}}</td>
       </tr>
       <tr>
         <td>性别：</td>
-        <td>{{detailData.sex}}</td>
+        <td class="display-value">{{detailData.sex}}</td>
       </tr>
       <tr>
         <td>出生日期：</td>
-        <td>{{detailData.birthday}}</td>
+        <td class="display-value">{{detailData.birthday}}</td>
       </tr>
       <tr>
         <td>所属公司：</td>
-        <td>{{detailData.company}}</td>
+        <td class="display-value">{{detailData.company}}</td>
       </tr>
       <tr>
         <td>客户等级：</td>
-        <td>{{level}}</td>
+        <td class="display-value">{{level}}</td>
       </tr>
       <tr>
         <td>家庭住址：</td>
-        <td>{{detailData.address}}</td>
+        <td class="display-value">{{detailData.address}}</td>
       </tr>
       <tr>
         <td>联系方式：</td>
-        <td>{{detailData.cncontact}}</td>
+        <td class="display-value">{{detailData.cncontact}}</td>
       </tr>
     </table>
-    <div>
+    <div class="bottom-btn">
       <Button @click="hide">关闭</Button>
     </div>
   </Modal>
+</div>
 </template>
-<style>
-
+<style scoped>
+.modal-root {
+  text-align: center;
+}
+td {
+  font-size: 20px;
+  text-align: right;
+}
+.display-value {
+  text-align: left;
+}
+.bottom-btn {
+  text-align: center;
+}
 </style>
 <script>
 import {getLevelStar} from '@/utils/StringUtils.js'

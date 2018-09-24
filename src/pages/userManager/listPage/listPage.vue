@@ -18,6 +18,7 @@
 <script>
 import DetailModal from './detailModal'
 import {getLevelStar} from '@/utils/StringUtils.js'
+import axios from '@/libs/api.request'
 export default {
   components: {
     DetailModal
@@ -29,7 +30,21 @@ export default {
       columns: [
         {
           title: '中文名',
-          key: 'cname'
+          key: 'cname',
+          render: (h, params) => {
+            return h('a', {
+              props: {
+              },
+              style: {
+                cursor: 'pointer'
+              },
+              on: {
+                click: () => {
+                  this.show(params)
+                }
+              }
+            }, params.row.cname)
+          }
         },
         {
           title: '英文名',
@@ -96,7 +111,22 @@ export default {
                     this.show(params)
                   }
                 }
-              }, 'Delete')
+              }, 'Delete'),
+              h('icon', {
+                props: {
+                  type: 'ios-create',
+                  size: 20
+                },
+                style: {
+                  marginRight: '10px',
+                  cursor: 'pointer'
+                },
+                on: {
+                  click: () => {
+                    this.show(params)
+                  }
+                }
+              }, 'Edit')
             ])
           }
         }
@@ -136,7 +166,7 @@ export default {
       this.$router.push({name: 'addPage'})
     },
     deleteRecord: function (params) {
-      console.log('delete id ' + params.row.id)
+      this.$Message.info('假装删除了id：' + params.row.id + '的记录')
     },
     show: function (params) {
       this.detailData = params.row
@@ -145,6 +175,21 @@ export default {
     hide: function (showDetail) {
       this.showDetail = false
     }
+  },
+  beforeCreate (e) {
+    axios.request({
+      url: 'api/queryClientList.action',
+      params: {
+        keyword: '1',
+        start: 0,
+        limit: 10
+      },
+      method: 'get'
+    }).then(res => {
+      this.gridData = res.data.data.rows
+    }).catch(function (error) {
+      console.log('error init.' + error)
+    })
   }
 }
 </script>

@@ -5,9 +5,14 @@ import App from './App'
 import router from './router'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
+import axios from 'axios'
+const config = require('../config')
 
 Vue.config.productionTip = false
 Vue.use(iView)
+Vue.prototype.$axios = axios
+Vue.prototype.$config = config
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

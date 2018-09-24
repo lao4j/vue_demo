@@ -118,7 +118,12 @@ export default {
           }
         ],
         sex: [
-          { required: true, message: '请选择性别', trigger: 'change' }
+          {
+            required: true,
+            message: '请选择性别',
+            trigger: 'change',
+            width: 60
+          }
         ],
         birthday: [
           {
