@@ -188,7 +188,7 @@ export default {
     }).then(res => {
       this.gridData = res.data.data.rows
     }).catch(function (error) {
-      console.log('error init.' + error)
+      this.$Message.info(error)
     })
   }
 }

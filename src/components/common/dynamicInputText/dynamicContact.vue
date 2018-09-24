@@ -2,9 +2,9 @@
 <div>
   <FormItem>
     <div class="contact-item" v-for="(item,index) in contactList" :key="item.id" v-bind:index="index">
-      <Input v-model="contactList[index].contact" icon='md-trash' @on-click='delContact(contactList[index].id)' id="contactList[index].id">
-        <Select v-model="contactList[index].contactType" slot="prepend" style="width: 80px">
-          <Option value="QQ">QQ</Option>
+      <Input v-model="contactList[index].value" icon='md-trash' @on-click='delContact(contactList[index].id)' id="contactList[index].id">
+        <Select v-model="contactList[index].type" slot="prepend" style="width: 80px">
+          <Option value="qq">QQ</Option>
           <Option value="mobile">手机</Option>
           <Option value="mail">邮箱</Option>
           <Option value="tel">固定电话</Option>
@@ -53,8 +53,8 @@ export default {
       currentNum++
       this.contactList.push({
         id: 'contact-item-' + new Date().getTime(),
-        contactType: 'QQ',
-        contact: ''
+        type: 'QQ',
+        value: ''
       })
     },
     delContact: function (id) {

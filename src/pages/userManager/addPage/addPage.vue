@@ -57,6 +57,7 @@
 
 <script>
 import DynamicContact from '@/components/common/dynamicInputText'
+import axios from '@/libs/api.request'
 export default {
   components: {
     DynamicContact
@@ -66,8 +67,8 @@ export default {
       contactList: [
         {
           id: 'contact-item-' + new Date().getTime(),
-          contactType: 'QQ',
-          contact: ''
+          type: 'QQ',
+          value: ''
         }
       ],
       formValidate: {
@@ -146,7 +147,25 @@ export default {
   },
   methods: {
     handleSubmit (name) {
-      let contacts = this.$refs.DynamicContact.getSubmitValues()
+      debugger
+      axios.request({
+        url: 'api/addClient.action',
+        params: {
+          cname: this.cname,
+          ename: this.ename,
+          company: this.company,
+          city: this.city,
+          sex: this.sex,
+          address: this.address,
+          contact: this.contactList,
+          birthday: this.birthday
+        },
+        method: 'post'
+      }).then(res => {
+        this.$Message.info('保存成功')
+      }).catch(function (error) {
+        this.$Message.error(error)
+      })
       console.log(contacts)
     },
     handleReset (name) {
