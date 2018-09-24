@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <td>性别：</td>
-        <td class="display-value">{{detailData.sex}}</td>
+        <td class="display-value">{{sex}}</td>
       </tr>
       <tr>
         <td>出生日期：</td>
@@ -57,7 +57,7 @@ td {
 }
 </style>
 <script>
-import {getLevelStar} from '@/utils/StringUtils.js'
+import {getLevelStar, sexEn2Cn} from '@/utils/StringUtils.js'
 export default {
   name: 'DetailModal',
   props: ['showDetail', 'detailData'],
@@ -79,6 +79,9 @@ export default {
   computed: {
     level: function () {
       return getLevelStar(this.detailData.level)
+    },
+    sex: function () {
+      return sexEn2Cn(this.detailData.sex)
     }
   }
 }

@@ -17,7 +17,7 @@
 
 <script>
 import DetailModal from './detailModal'
-import {getLevelStar} from '@/utils/StringUtils.js'
+import {getLevelStar, sexEn2Cn} from '@/utils/StringUtils.js'
 import axios from '@/libs/api.request'
 export default {
   components: {
@@ -52,7 +52,11 @@ export default {
         },
         {
           title: '性别',
-          key: 'sex'
+          key: 'sex',
+          render: (h, params) => {
+            var sex = params.row.sex
+            return h('div', {}, sexEn2Cn(sex))
+          }
         },
         {
           title: '出生日期',
@@ -67,8 +71,7 @@ export default {
           key: 'level',
           render: (h, params) => {
             var level = params.row.level
-            var result = getLevelStar(level)
-            return h('div', {}, result)
+            return h('div', {}, getLevelStar(level))
           }
         },
         {
