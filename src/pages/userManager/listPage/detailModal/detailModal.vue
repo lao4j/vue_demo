@@ -46,20 +46,7 @@
 </div>
 </template>
 <style scoped>
-.modal-root {
-  text-align: center;
-}
-td {
-  font-size: 20px;
-  text-align: right;
-}
-.display-value {
-  text-align: left;
-}
-.bottom-btn {
-  text-align: center;
-  margin-top: 10px;
-}
+@import './detailModal.css';
 </style>
 <script>
 import {getLevelStar, sexEn2Cn, contactTypeEn2Cn} from '@/utils/StringUtils.js'

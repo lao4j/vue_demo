@@ -141,7 +141,7 @@ export default {
           ename: 'rich man',
           sex: 'male',
           company: '万达集团',
-          level: '5',
+          level: 5,
           address: '这个我也不知道啊，可能四海为家吧。。',
           birthday: '2016-10-03',
           contact: [
@@ -157,7 +157,7 @@ export default {
           ename: 'east man',
           sex: 'female',
           company: '京东集团',
-          level: '4',
+          level: 4,
           address: '这个我也不知道啊，不知道回来了没',
           birthday: '1950-10-03'
         }

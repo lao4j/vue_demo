@@ -22,11 +22,11 @@
           </FormItem>
           <FormItem label="客户等级" prop="level">
               <Select v-model="formValidate.level" placeholder="选择一个等级">
-                  <Option value="5">⭐⭐⭐⭐⭐</Option>
-                  <Option value="4">⭐⭐⭐⭐</Option>
-                  <Option value="3">⭐⭐⭐</Option>
-                  <Option value="2">⭐⭐</Option>
-                  <Option value="1">⭐</Option>
+                  <Option :value=5>⭐⭐⭐⭐⭐</Option>
+                  <Option :value=4>⭐⭐⭐⭐</Option>
+                  <Option :value=3>⭐⭐⭐</Option>
+                  <Option :value=2>⭐⭐</Option>
+                  <Option :value=1>⭐</Option>
               </Select>
           </FormItem>
           <FormItem label="家庭住址" prop="address">
@@ -48,11 +48,7 @@
     </Form>
 </template>
 <style scoped>
-.button-div {
-  text-align: left;
-  margin-top: 10px;
-  margin-left: 10px;
-}
+@import './addPage.css';
 </style>
 
 <script>
@@ -152,6 +148,7 @@ export default {
     handleReset (name) {
       this.$refs[name].resetFields()
       this.contactList = this.getDefaultContactList()
+      this.formValidate.birthday = ''
     },
     setParams: function () {
       if (!this.$route.params.userData) {
