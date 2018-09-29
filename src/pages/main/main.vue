@@ -1,15 +1,15 @@
 <template>
 <div class="layout">
     <Layout>
-        <Sider hide-trigger width="auto" class="left-sider" :style="{overflow: 'hidden'}">
-            <side-menu @on-select="turnToPage">
-            </side-menu>
-        </Sider>
+        <Header>
+            <header-menu>
+            </header-menu>
+        </Header>
         <Layout>
-            <Header>
-                <header-menu>
-                </header-menu>
-            </Header>
+            <Sider hide-trigger width="auto" class="left-sider" :style="{overflow: 'hidden'}">
+                <side-menu @on-select="turnToPage">
+                </side-menu>
+            </Sider>
              <Content class="main-content-con">
                 <Layout class="main-layout-con">
                     <Content class="content-wrapper">
