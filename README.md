@@ -1,6 +1,6 @@
-# ws_vue_homework
+# vue_train
 
-# this is homework for ws vue train
+# this is for vue train
 
 #听说README都要写得很复杂才能证明你很xx
 
