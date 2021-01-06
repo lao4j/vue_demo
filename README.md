@@ -1,6 +1,6 @@
-# vue_train
+# vue_demo
 
-# this is for vue train
+# this is for vue demo
 
 #听说README都要写得很复杂才能证明你很xx
 
